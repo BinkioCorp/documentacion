@@ -1,0 +1,78 @@
+---
+title: Generate Backup Codes
+description: Este endpoint permite generar códigos de respaldo para la autenticación de dos factores (2FA). Estos códigos se deben almacenar de manera segura, ya que se pueden usar si el usuario no tiene acceso a su dispositivo de autenticación principal.
+
+---
+
+## POST `/api/auth/generate-backup-codes`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/generate-backup-codes`
+
+**Cuerpo de la solicitud:**
+
+Este endpoint no requiere parámetros adicionales en el cuerpo de la solicitud.
+
+### Respuestas
+
+**200 - Códigos de respaldo generados exitosamente**
+
+```json
+{
+  "backupCodes": [
+    "abcdef123456",
+    "ghijk789012",
+    "lmnop345678",
+    "qrstuv987654"
+  ]
+}
+
+```
+
+**400 - Error al generar los códigos de respaldo**
+
+```json
+{
+  "message": "Hubo un error al generar los códigos de respaldo."
+}
+
+```
+
+**Notas:**
+
+Estos códigos pueden usarse para completar el proceso de autenticación de dos factores en caso de que el usuario pierda el acceso a su dispositivo de autenticación principal.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/generate-backup-codes HTTP/1.1
+Content-Type: application/json
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "backupCodes": [
+    "abcdef123456",
+    "ghijk789012",
+    "lmnop345678",
+    "qrstuv987654"
+  ]
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "Hubo un error al generar los códigos de respaldo."
+}
+
+```

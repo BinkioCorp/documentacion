@@ -1,0 +1,89 @@
+---
+title: Verify Phone
+description: Este endpoint permite verificar el número de teléfono del usuario. Se envía un SMS con un código de verificación al número proporcionado.
+---
+
+## POST `/api/auth/verify-phone`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-phone`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "phone": "string"
+}
+
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `phone`           | `string`  | Sí            | Número de teléfono que se desea verificar. Debe incluir el código de país (por ejemplo, +1 para EE. UU.).  |
+
+### Respuestas
+
+**200 - Solicitud de verificación enviada**
+
+```json
+{
+  "message": "Se ha enviado un código de verificación al teléfono proporcionado."
+}
+
+```
+
+**400 - Error en la solicitud**
+
+```json
+{
+  "message": "El número de teléfono no es válido."
+}
+
+```
+
+**404 - Usuario no encontrado**
+
+```json
+{
+  "message": "El número de teléfono no está asociado con ningún usuario registrado."
+}
+
+```
+**Notas:**
+
+El código de verificación enviado al número de teléfono es necesario para completar la verificación del número de teléfono.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-phone HTTP/1.1
+Content-Type: application/json
+
+{
+  "phone": "+1234567890"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Se ha enviado un código de verificación al teléfono proporcionado."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El número de teléfono no es válido."
+}
+
+```

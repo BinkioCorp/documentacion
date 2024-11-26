@@ -1,0 +1,94 @@
+---
+title: Confirm Phone Verification
+description: Este endpoint permite confirmar la verificación del número de teléfono del usuario. El usuario debe proporcionar el código de verificación recibido por SMS.
+
+---
+
+## POST `/api/auth/verify-phone/confirm`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-phone/confirm`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "phone": "string",
+  "code": "string"
+}
+
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `phone`           | `string`  | Sí            | Número de teléfono que se desea confirmar. Debe incluir el código de país (por ejemplo, +1 para EE. UU.).  |
+| `code`            | `string`  | Sí            | 	El código de verificación recibido por SMS.                  |
+
+### Respuestas
+
+**200 - Verificación exitosa**
+
+```json
+{
+  "message": "El número de teléfono ha sido verificado con éxito."
+}
+
+```
+
+**400 - Error en la verificación**
+
+```json
+{
+  "message": "El código de verificación es incorrecto o ha expirado."
+}
+
+```
+
+**404 - Usuario no encontrado**
+
+```json
+{
+  "message": "El número de teléfono no está asociado con ningún usuario registrado."
+}
+
+```
+
+**Notas:**
+
+El código tiene un tiempo de expiración, por lo que debe ser utilizado dentro de un periodo determinado.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-phone/confirm HTTP/1.1
+Content-Type: application/json
+
+{
+  "phone": "+1234567890",
+  "code": "123456"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "El número de teléfono ha sido verificado con éxito."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El código de verificación es incorrecto o ha expirado."
+}
+
+```

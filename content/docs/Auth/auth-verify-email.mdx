@@ -1,0 +1,97 @@
+---
+title: Verify Email
+description: Este endpoint permite verificar un correo electrónico enviando un enlace de confirmación al email proporcionado.
+
+---
+
+## POST `/api/auth/verify-email`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-email`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "email": "string"
+}
+
+```
+### Detalle de los Parámetros
+
+| **Nombre**  | **Tipo**  | **Requerido** | **Descripción**                                              |
+|-------------|-----------|---------------|--------------------------------------------------------------|
+| `email`     | `string`  | Sí            | Dirección de correo electrónico del usuario a verificar.     |
+
+
+### Respuestas
+
+**200 - Verificación enviada exitosamente**
+
+```json
+{
+  "message": "Correo de verificación enviado exitosamente."
+}
+
+```
+
+**400 - Error en la solicitud**
+
+```json
+{
+  "message": "El correo electrónico es obligatorio o tiene un formato inválido.",
+  "errors": {
+    "email": "Debe proporcionar un correo electrónico válido."
+  }
+}
+
+```
+
+**401 - Correo electrónico no encontrado**
+
+```json
+{
+  "message": "El correo electrónico proporcionado no está registrado."
+}
+
+```
+**Notas:**
+
+Es obligatorio proporcionar un correo electrónico válido.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-email HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "usuario@dominio.com"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Correo de verificación enviado exitosamente."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El correo electrónico es obligatorio o tiene un formato inválido.",
+  "errors": {
+    "email": "Debe proporcionar un correo electrónico válido."
+  }
+}
+
+```

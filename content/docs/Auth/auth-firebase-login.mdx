@@ -1,0 +1,89 @@
+---
+title: Firebase Login
+description: Este endpoint permite a los usuarios iniciar sesión utilizando un token generado por Firebase.
+
+---
+
+## POST `/api/auth/firebase-login`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/firebase-login`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "idToken": "string"
+}
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `idToken`         | `string`  | Sí            | Token de autenticación generado por Firebase.                  |
+
+
+### Respuestas
+
+**200 - Inicio de sesión exitoso**
+
+```json
+{
+  "message": "Inicio de sesión exitoso.",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "name": "Juan Pérez"
+  }
+}
+
+```
+**401 - Token inválido**
+
+```json
+{
+  "message": "El token proporcionado es inválido o ha expirado."
+}
+```
+**Notas:**
+
+El idToken debe ser generado y válido por Firebase para garantizar la autenticación.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/firebase-login HTTP/1.1
+Content-Type: application/json
+
+{
+  "idToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Inicio de sesión exitoso.",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "name": "Juan Pérez"
+  }
+}
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El token proporcionado es inválido o ha expirado."
+}
+
+```

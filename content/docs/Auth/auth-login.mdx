@@ -1,0 +1,82 @@
+---
+title: Login
+description: Este endpoint permite a los usuarios iniciar sesión con sus credenciales (correo electrónico y contraseña).
+
+---
+
+## POST `/api/auth/login`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/login`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "email": "usuario@dominio.com",
+  "password": "TuContraseñaSegura123"
+}
+```
+### Detalle de los Parámetros
+
+| **Nombre**  | **Tipo**  | **Requerido** | **Descripción**                                              |
+|-------------|-----------|---------------|--------------------------------------------------------------|
+| `email`     | `string`  | Sí            | Dirección de correo electrónico previamente verificada.       |
+| `password`  | `string`  | Sí            | La contraseña del usuario.                                    |
+
+
+### Respuestas
+
+**200 - Inicio de sesión exitoso**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "name": "Juan Pérez"
+  }
+}
+```
+
+**401 - Credenciales inválidas**
+
+```json
+{
+  "message": "Correo o contraseña incorrectos."
+}
+```
+**Notas:**
+
+El token devuelto es un JWT que debe usarse para autenticar las solicitudes posteriores.
+
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "usuario@dominio.com",
+  "password": "TuContraseñaSegura123"
+}
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "name": "Juan Pérez"
+  }
+}
+```

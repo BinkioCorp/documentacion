@@ -1,0 +1,110 @@
+---
+title: Register
+description: Este endpoint permite registrar un nuevo usuario proporcionando la información requerida.
+
+---
+
+## POST `/api/auth/register`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/register`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "email": "usuario@dominio.com",
+  "password": "TuContraseñaSegura123",
+  "confirm_password": "TuContraseñaSegura123",
+  "country_id": "123",
+  "full_name": "Juan Pérez",
+  "gender": "M",
+  "phone": "+1234567890",
+  "accept_terms": true,
+  "user_type": "Fisica",
+  "has_signature": true
+}
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `email`           | `string`  | Sí            | El correo electrónico del usuario.                             |
+| `password`        | `string`  | Sí            | La contraseña del usuario.                                     |
+| `confirm_password`| `string`  | Sí            | Confirmación de la contraseña del usuario.                     |
+| `country_id`      | `string`  | Sí            | ID del país del usuario.                                       |
+| `full_name`       | `string`  | Sí            | Nombre completo del usuario.                                   |
+| `gender`          | `string`  | Sí            | Género del usuario (**M** para masculino, **F** para femenino).|
+| `phone`           | `string`  | Sí            | Número de teléfono del usuario.                                |
+| `accept_terms`    | `boolean` | Sí            | Indica si el usuario acepta los términos y condiciones.        |
+| `user_type`       | `string`  | Sí            | Tipo de usuario (**Fisica** o **Moral**).                      |
+| `has_signature`   | `boolean` | Sí            | Indica si el usuario tiene firma digital.                      |
+
+### Respuestas
+
+**200 - Usuario registrado exitosamente**
+
+```json
+{
+  "message": "Usuario registrado exitosamente.",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "full_name": "Juan Pérez",
+    "phone": "+1234567890",
+    "country_id": "123",
+    "user_type": "Fisica"
+  }
+}
+```
+
+**400 - Error en la solicitud**
+
+```json
+{
+  "message": "La contraseña y la confirmación no coinciden."
+}
+```
+**Notas:**
+
+La contraseña debe cumplir con los criterios de seguridad establecidos (longitud mínima, caracteres especiales, etc.).
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "usuario@dominio.com",
+  "password": "TuContraseñaSegura123",
+  "confirm_password": "TuContraseñaSegura123",
+  "country_id": "123",
+  "full_name": "Juan Pérez",
+  "gender": "M",
+  "phone": "+1234567890",
+  "accept_terms": true,
+  "user_type": "Fisica",
+  "has_signature": true
+}
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Usuario registrado exitosamente.",
+  "user": {
+    "id": "12345",
+    "email": "usuario@dominio.com",
+    "full_name": "Juan Pérez",
+    "phone": "+1234567890",
+    "country_id": "123",
+    "user_type": "Fisica"
+  }
+}
+```

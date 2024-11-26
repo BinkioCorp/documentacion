@@ -1,0 +1,124 @@
+---
+title: Complete Profile
+description: Este endpoint permite a los usuarios completar su perfil proporcionando información adicional requerida.
+
+---
+
+## POST `/api/auth/complete-profile`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/complete-profile`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "country_id": "string",
+  "full_name": "string",
+  "gender": "M",
+  "phone": "string",
+  "accept_terms": true,
+  "user_type": "fisica",
+  "has_signature": true
+}
+
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `country_id`      | `string`  | Sí            | Identificador único del país.                                  |
+| `full_name`       | `string`  | Sí            | Nombre completo del usuario.                                   |
+| `gender`          | `string`  | Sí            | Género del usuario (**M** para masculino, **F** para femenino).|
+| `phone`           | `string`  | Sí            | Número de teléfono del usuario.                                |
+| `accept_terms`    | `boolean` | Sí            | Indica si el usuario acepta los términos y condiciones.        |
+| `user_type`       | `string`  | Sí            | Tipo de usuario (**Fisica** o **Moral**).                      |
+| `has_signature`   | `boolean` | Sí            | Indica si el usuario tiene firma digital.                      |
+
+
+### Respuestas
+
+**200 - Perfil completado exitosamente**
+
+```json
+{
+  "message": "Perfil completado exitosamente.",
+  "user": {
+    "id": "12345",
+    "country_id": "MX",
+    "full_name": "Juan Pérez",
+    "gender": "M",
+    "phone": "+521234567890",
+    "user_type": "fisica",
+    "has_signature": true
+  }
+}
+
+```
+
+**401 - Error en la solicitud**
+
+```json
+{
+  "message": "Faltan parámetros obligatorios o son inválidos.",
+  "errors": {
+    "country_id": "Debe ser un identificador válido.",
+    "phone": "Formato inválido para el número de teléfono."
+  }
+}
+```
+**Notas:**
+
+Es obligatorio que todos los parámetros sean enviados correctamente para completar el perfil.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/complete-profile HTTP/1.1
+Content-Type: application/json
+
+{
+  "country_id": "MX",
+  "full_name": "Juan Pérez",
+  "gender": "M",
+  "phone": "+521234567890",
+  "accept_terms": true,
+  "user_type": "fisica",
+  "has_signature": true
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Perfil completado exitosamente.",
+  "user": {
+    "id": "12345",
+    "country_id": "MX",
+    "full_name": "Juan Pérez",
+    "gender": "M",
+    "phone": "+521234567890",
+    "user_type": "fisica",
+    "has_signature": true
+  }
+}
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "Faltan parámetros obligatorios o son inválidos.",
+  "errors": {
+    "country_id": "Debe ser un identificador válido.",
+    "phone": "Formato inválido para el número de teléfono."
+  }
+}
+
+```

@@ -1,0 +1,107 @@
+---
+title: Confirm Email Verification
+description: Este endpoint permite confirmar la verificación del correo electrónico de un usuario utilizando un código enviado previamente al email registrado.
+---
+
+## POST `/api/auth/verify-email/confirm`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-email/confirm`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "email": "string",
+  "code": "string"
+}
+
+```
+
+### Detalle de los Parámetros
+
+| **Nombre**  | **Tipo**  | **Requerido** | **Descripción**                                              |
+|-------------|-----------|---------------|--------------------------------------------------------------|
+| `email`     | `string`  | Sí            | Dirección de correo electrónico previamente verificada.      |
+| `code`      | `string`  | Sí            | Código de verificación enviado al correo del usuario.        |
+
+
+### Respuestas
+
+**200 - Verificación confirmada exitosamente**
+
+```json
+{
+  "message": "Correo verificado exitosamente."
+}
+
+```
+
+**400 - Error en la solicitud**
+
+```json
+{
+  "message": "El correo electrónico y el código son obligatorios.",
+  "errors": {
+    "email": "Debe proporcionar un correo electrónico válido.",
+    "code": "Debe proporcionar un código válido."
+  }
+}
+
+```
+
+**401 - Código inválido o expirado**
+
+```json
+{
+  "message": "El código de verificación es inválido o ha expirado."
+}
+
+```
+
+**404 - Correo electrónico no encontrado**
+
+```json
+{
+  "message": "El correo electrónico proporcionado no está registrado."
+}
+
+```
+**Notas:**
+
+El código de verificación enviado al correo tiene un tiempo de expiración limitado.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-email/confirm HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "usuario@dominio.com",
+  "code": "123456"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Correo verificado exitosamente."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El código de verificación es inválido o ha expirado."
+}
+
+```

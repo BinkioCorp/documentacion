@@ -1,0 +1,55 @@
+---
+title: Generate 2FA QR Code
+description: Este endpoint permite a los usuarios generar un código QR para habilitar la autenticación de dos factores (2FA) en su cuenta. El código QR es utilizado por una aplicación de autenticación para generar códigos temporales.
+---
+
+## POST `/api/auth/generate-2fa`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/generate-2fa`
+
+**Cuerpo de la solicitud:**
+
+No requiere parámetros en el cuerpo de la solicitud.
+
+### Respuestas
+
+**201 - Código QR generado exitosamente**
+
+```json
+{
+  "qrCode": "string"
+}
+
+```
+
+**Descripción de la respuesta:**
+
+El código QR generado como una cadena que puede ser escaneada por una aplicación de autenticación (como Google Authenticator o Authy) para habilitar 2FA en la cuenta del usuario.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/generate-2fa HTTP/1.1
+Content-Type: application/json
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "qrCode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...."
+}
+
+```
+
+**Notas:**
+
+Después de escanear el código QR, el usuario deberá utilizar la aplicación de autenticación para generar códigos temporales cada vez que inicie sesión, como parte del proceso de autenticación de dos factores.
+
+Este paso es crucial para mejorar la seguridad de la cuenta.

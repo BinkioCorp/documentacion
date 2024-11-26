@@ -1,0 +1,82 @@
+---
+title: Verify 2FA Token
+description: Este endpoint permite verificar el código generado por la aplicación de autenticación de dos factores (2FA). El token generado por la aplicación de autenticación es enviado para validar la autenticación del usuario.
+
+---
+
+## POST `/api/auth/verify-2fa`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-2fa`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "token": "string"
+}
+
+```
+### Detalle de los Parámetros
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `token`           | `string`  | Sí            | Código temporal generado por la aplicacion de autenticación 2FA|
+
+### Respuestas
+
+**200 - Verificación de 2FA exitosa**
+
+```json
+{
+  "message": "2FA verification successful."
+}
+
+```
+
+**401 - Token de 2FA inválido**
+
+```json
+{
+  "message": "Invalid 2FA token."
+}
+
+```
+
+**Notas:**
+
+El token enviado tiene un tiempo de vida corto y debe ser utilizado rápidamente para evitar que caduque.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-2fa HTTP/1.1
+Content-Type: application/json
+
+{
+  "token": "123456"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "2FA verification successful."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El código de verificación es incorrecto o ha expirado."
+}
+
+```

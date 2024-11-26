@@ -1,0 +1,76 @@
+---
+title: Verify Backup Code
+description: Este endpoint permite verificar si un código de respaldo de autenticación de dos factores (2FA) es válido. El código de respaldo se usa en situaciones donde el usuario no puede acceder a su dispositivo de autenticación principal.
+
+---
+
+## POST `/api/auth/verify-backup-code`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/auth/verify-backup-code`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "backupCode": "string"
+}
+
+```
+### Respuestas
+
+**200 - Código de respaldo verificado exitosamente**
+
+```json
+{
+  "message": "Código de respaldo verificado exitosamente."
+}
+
+```
+
+**400 - Código de respaldo inválido**
+
+```json
+{
+  "message": "El código de respaldo es inválido."
+}
+
+```
+
+**Notas:**
+
+El código de respaldo proporcionado debe ser uno de los generados previamente durante el proceso de autenticación de dos factores.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/auth/verify-backup-code HTTP/1.1
+Content-Type: application/json
+
+{
+  "backupCode": "abcdef123456"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Código de respaldo verificado exitosamente."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El código de respaldo es inválido."
+}
+
+```
