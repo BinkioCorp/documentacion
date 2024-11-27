@@ -1,0 +1,91 @@
+---
+title: Users
+description: Este endpoint permite obtener una lista de todos los usuarios registrados en el sistema. Es útil para administradores o sistemas que necesiten gestionar usuarios y acceder a información básica como nombres, correos electrónicos y roles.
+
+---
+
+## GET `/api/users`
+
+### Solicitud
+
+**Método:** GET  
+**Ruta:** `/api/users`
+
+### Cuerpo de la solicitud:
+
+Este endpoint no requiere parámetros adicionales en la solicitud.
+
+### Respuestas
+
+**200 - Lista de usuarios obtenida exitosamente**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Juan Pérez",
+    "email": "juan.perez@correo.com",
+    "role": "admin"
+  },
+  {
+    "id": "2",
+    "name": "Ana López",
+    "email": "ana.lopez@correo.com",
+    "role": "user"
+  }
+]
+
+```
+
+**403 - Acceso denegado**
+
+```json
+{
+  "message": "No tienes permisos para acceder a este recurso."
+}
+
+```
+
+**500 - Error interno del servidor**
+
+```json
+{
+  "message": "Ocurrió un error al intentar obtener los usuarios."
+}
+
+```
+
+**Notas:**
+
+Este endpoint requiere privilegios de administrador para acceder a la lista de usuarios.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+GET /api/users HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <TOKEN_DE_AUTENTICACIÓN>
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Juan Pérez",
+    "email": "juan.perez@correo.com",
+    "role": "admin"
+  },
+  {
+    "id": "2",
+    "name": "Ana López",
+    "email": "ana.lopez@correo.com",
+    "role": "user"
+  }
+]
+
+```

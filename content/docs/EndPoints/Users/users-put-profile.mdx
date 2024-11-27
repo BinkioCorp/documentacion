@@ -1,0 +1,150 @@
+---
+title: Put Profile
+description: Este endpoint permite a los usuarios autenticados actualizar la información de su perfil.
+
+---
+
+##  PUT `/api/users/profile`
+
+### Solicitud
+
+**Método:** PUT  
+**Ruta:** `/api/users/profile`
+
+### Cuerpo de la solicitud:
+
+```json
+{
+  "firstName": "string",
+  "lastName": "string",
+  "userType": "string",
+  "address": "string",
+  "civilStatus": "string",
+  "regimenMatrimonial": "string",
+  "resetToken": "string",
+  "resetTokenExpires": "2024-11-27T16:56:29.716Z",
+  "lastPasswordResetRequest": "2024-11-27T16:56:29.716Z",
+  "password": "string",
+  "biometric": true,
+  "biometricStatus": "string",
+  "kycLevel": 0,
+  "kycStatus": true,
+  "clabe": "string",
+  "policyWallet": true,
+  "policyMarket": true,
+  "pictureProfile": "string",
+  "country": {}
+}
+
+```
+
+### Detalle de los Parámetros
+
+| **Nombre**                | **Tipo**  | **Requerido** | **Descripción**                                                  |
+|---------------------------|-----------|---------------|------------------------------------------------------------------|
+| `firstName`               | `string`  | No            | Nombre del usuario.                                              |
+| `lastName`                | `string`  | No            | Apellido del usuario.                                            |
+| `userType`                | `string`  | No            | Tipo de usuario (**fisica** o **moral**).                        |
+| `address`                 | `string`  | No            | Dirección del usuario.                                           |
+| `civilStatus`             | `string`  | No            | Estado civil del usuario.                                        |
+| `regimenMatrimonial`      | `string`  | No            | Régimen matrimonial del usuario.                                 |
+| `resetToken`              | `string`  | No            | Token de restablecimiento de contraseña.                         |
+| `resetTokenExpires`       | `string`  | No            | echa de expiración del token de restablecimiento de contraseña.  |
+| `lastPasswordResetRequest`| `string`  | No            | Fecha de la última solicitud de cambio de contraseña.            |
+| `password`                | `string`  | No            | Indica si el usuario tiene firma digital.                        |
+| `biometric`               | `boolean` | No            | Indica si el usuario usa biometría.                              |
+| `biometricStatus`         | `string`  | No            | stado de la biometría.                                           |
+| `kycLevel`                | `integer` | No            | Nivel de verificación KYC.                                       |
+| `kycStatus`               | `boolean` | No            | Estado de la verificación KYC.                                   |
+| `clabe`                   | `string`  | No            | CLABE bancaria del usuario.                                      |
+| `policyWallet`            | `boolean` | No            | Indica si el usuario acepta la política de billetera.            |
+| `policyMarket`            | `boolean` | No            | Indica si el usuario acepta la política de mercado.              |
+| `pictureProfile`          | `string`  | No            | URL o referencia de la foto de perfil del usuario.               |
+| `country`                 | `object`  | No            | Información del país asociado al usuario.                        |
+
+### Respuestas
+
+**200 - Perfil actualizado exitosamente**
+
+```json
+{
+  "message": "Perfil actualizado con éxito.",
+  "user": {
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "userType": "fisica",
+    "address": "Calle Falsa 123",
+    "civilStatus": "Soltero",
+    "biometric": true,
+    "kycStatus": true,
+    "pictureProfile": "https://example.com/profile.jpg"
+  }
+}
+
+```
+
+**400 - Error en los datos enviados**
+
+```json
+{
+  "message": "Alguno de los datos proporcionados es inválido."
+}
+
+```
+
+**401 - Usuario no autenticado**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+PUT /api/users/profile HTTP/1.1  
+Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...  
+
+{
+  "firstName": "Juan",
+  "lastName": "Pérez",
+  "userType": "fisica",
+  "address": "Calle Falsa 123",
+  "biometric": true,
+  "kycStatus": true,
+  "pictureProfile": "https://example.com/profile.jpg"
+}
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Perfil actualizado con éxito.",
+  "user": {
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "userType": "fisica",
+    "address": "Calle Falsa 123",
+    "biometric": true,
+    "kycStatus": true,
+    "pictureProfile": "https://example.com/profile.jpg"
+  }
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "Alguno de los datos proporcionados es inválido."
+}
+
+```

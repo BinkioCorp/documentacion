@@ -1,0 +1,91 @@
+---
+title: Phone
+description: Este endpoint permite obtener información de un usuario específico utilizando su número de teléfono.
+
+---
+
+## GET `/api/users/phone/{phone}`
+
+### Solicitud
+
+**Método:** GET
+**Ruta:** `/api/users/phone/{phone}`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "phone": "string"
+}
+
+```
+
+### Detalle de los Parámetros de consulta
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                      |
+|-------------------|-----------|---------------|----------------------------------------------------------------------|
+| `phone`           | `string`  | Sí            | Número de teléfono del usuario que se desea consultar.               |
+
+
+
+### Respuestas
+
+**200 - Consulta exitosa**
+
+```json
+{
+  "id": "67890",
+  "phone": "+123456789",
+  "name": "Ana López",
+  "status": "active",
+  "createdAt": "2024-11-27T14:12:34.000Z"
+}
+
+```
+
+**404 - Usuario no encontrado**
+
+```json
+{
+  "message": "No se encontró un usuario con el número de teléfono especificado."
+}
+
+```
+
+### Notas
+
+Se requiere un token de autorización válido en el encabezado para realizar esta operación.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+GET /api/users/phone/+123456789 HTTP/1.1
+Host: api.ejemplo.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "id": "67890",
+  "phone": "+123456789",
+  "name": "Ana López",
+  "status": "active",
+  "createdAt": "2024-11-27T14:12:34.000Z"
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "No se encontró un usuario con el número de teléfono especificado."
+}
+
+```

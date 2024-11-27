@@ -1,0 +1,81 @@
+---
+title: Wallet
+description: Este endpoint permite obtener la información de los saldos asociados a la cuenta del usuario actual.
+---
+
+## GET `/api/users/wallet`
+
+### Solicitud
+
+**Método:** GET 
+**Ruta:** `/api/users/wallet`
+
+### Cuerpo de la solicitud:
+
+Este endpoint no requiere parámetros en la solicitud.
+
+### Respuestas
+
+**200 - Información de saldos obtenida exitosamente**
+
+```json
+{
+  "balances": {
+    "availableBalance": 1000.50,
+    "pendingBalance": 200.75,
+    "currency": "USD"
+  }
+}
+
+```
+
+**401 - Usuario no autenticado**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```
+
+
+**500 - Error en el servidor**
+
+```json
+{
+  "message": "Ocurrió un error al obtener los saldos del usuario."
+}
+
+```
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+GET /api/users/wallet HTTP/1.1  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "balances": {
+    "availableBalance": 1000.50,
+    "pendingBalance": 200.75,
+    "currency": "USD"
+  }
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```

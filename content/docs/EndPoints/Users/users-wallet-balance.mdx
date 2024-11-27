@@ -1,0 +1,114 @@
+---
+title: Wallet Balance
+description: Este endpoint permite obtener la información de balance de un activo específico asociado a la cuenta del usuario actual.
+
+---
+
+## GET `/api/users/wallet/balance/{assetId}`
+
+### Solicitud
+
+**Método:** GET
+**Ruta:** `/api/users/wallet/balance/{assetId}`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "assetId": "string"
+}
+
+```
+
+
+### Detalle de los Parámetros de consulta
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                               |
+|-------------------|-----------|---------------|-------------------------------------------------------------------------------|
+| `assetId`         | `string`  | Sí            | El identificador único del activo para el cual se desea obtener el balance.   |
+
+
+### Respuestas
+
+**200 - Información de balance del activo obtenida exitosamente**
+
+```json
+{
+  "assetId": "BTC",
+  "balance": {
+    "availableBalance": 0.045,
+    "pendingBalance": 0.002,
+    "currency": "BTC"
+  }
+}
+
+```
+
+**400 - Parámetros inválidos**
+
+```json
+{
+  "message": "El parámetro 'assetId' es requerido."
+}
+
+```
+
+**401 - Usuario no autenticado**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```
+
+**404 - Activo no encontrado**
+
+```json
+{
+  "message": "El activo especificado no existe o no está asociado a tu cuenta."
+}
+
+```
+
+**500 - Error en el servidor**
+
+```json
+{
+  "message": "Ocurrió un error al obtener el balance del activo."
+}
+
+```
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+GET /api/users/wallet/balance/BTC HTTP/1.1  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "assetId": "BTC",
+  "balance": {
+    "availableBalance": 0.045,
+    "pendingBalance": 0.002,
+    "currency": "BTC"
+  }
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "El activo especificado no existe o no está asociado a tu cuenta."
+}
+
+```

@@ -1,0 +1,76 @@
+---
+title: Get Profile
+description: Este endpoint permite obtener el perfil del usuario autenticado actualmente. Devuelve información básica como nombre, correo electrónico, rol y fecha de creación de la cuenta, basada en el token de autenticación proporcionado. Es útil para mostrar datos personalizados o gestionar configuraciones del usuario.
+---
+
+## GET `/api/users/profile`
+
+### Solicitud
+
+**Método:** GET  
+**Ruta:** `/api/users/profile`
+
+### Cuerpo de la solicitud:
+
+Este endpoint no requiere parámetros adicionales en la solicitud.
+
+### Respuestas
+
+**200 - Perfil del usuario obtenido exitosamente**
+
+```json
+{
+  "id": "12345",
+  "name": "Juan Pérez",
+  "email": "juan.perez@correo.com",
+  "role": "admin",
+  "createdAt": "2023-01-01T00:00:00Z"
+}
+
+```
+
+**401 - No autorizado**
+
+```json
+{
+  "message": "No se proporcionó un token válido."
+}
+
+```
+
+**500 - Error interno del servidor**
+
+```json
+{
+  "message": "Ocurrió un error al intentar obtener el perfil del usuario."
+}
+
+```
+
+**Notas:**
+
+Este endpoint devuelve los datos del usuario autenticado según el token de autorización proporcionado.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+GET /api/users/profile HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <TOKEN_DE_AUTENTICACIÓN>
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "id": "12345",
+  "name": "Juan Pérez",
+  "email": "juan.perez@correo.com",
+  "role": "admin",
+  "createdAt": "2023-01-01T00:00:00Z"
+}
+
+```

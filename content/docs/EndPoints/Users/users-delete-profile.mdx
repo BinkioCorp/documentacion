@@ -1,0 +1,73 @@
+---
+title: Delete Profile
+description: Este endpoint permite a los usuarios autenticados eliminar su perfil de manera permanente.
+---
+
+## DELETE `/api/users/profile`
+
+### Solicitud
+
+**Método:** DELETE 
+**Ruta:** `/api/users/profile`
+
+### Cuerpo de la solicitud:
+
+Este endpoint no requiere parámetros en la solicitud.
+
+### Respuestas
+
+**200 - Perfil eliminado exitosamente**
+
+```json
+{
+  "message": "Perfil eliminado exitosamente."
+}
+
+```
+
+**401 - Usuario no autenticado**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```
+
+
+**403 - Acción no permitida**
+
+```json
+{
+  "message": "No puedes eliminar tu perfil debido a restricciones en la cuenta."
+}
+
+```
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+DELETE /api/users/profile HTTP/1.1  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Perfil eliminado exitosamente."
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "No tienes permiso para realizar esta acción."
+}
+
+```

@@ -1,0 +1,97 @@
+---
+title: Vault
+description: Este endpoint permite crear un "vault" (bóveda) para un usuario especificado por su correo electrónico.
+
+---
+
+## POST `/api/users/vault`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/users/vault`
+
+**Cuerpo de la solicitud:**
+
+```json
+{
+  "emai": "string"
+}
+
+```
+
+### Detalle de los Parámetros de consulta
+
+| **Nombre**        | **Tipo**  | **Requerido** | **Descripción**                                                |
+|-------------------|-----------|---------------|----------------------------------------------------------------|
+| `email`           | `string`  | Sí            | Correo electrónico del usuario.                                |
+
+**Ejemplo de consulta:**
+
+```bash
+/api/users/vault?email=usuario@dominio.com
+
+```
+
+### Respuestas
+
+**201 - Bóveda creada exitosamente**
+
+```json
+{
+  "message": "Bóveda creada exitosamente.",
+  "vaultId": "12345"
+}
+
+```
+
+**400 - Solicitud incorrecta**
+
+```json
+{
+  "message": "El parámetro 'email' es obligatorio."
+}
+
+```
+
+**404 - Usuario no encontrado**
+
+```json
+{
+  "message": "Usuario no encontrado."
+}
+
+```
+
+**Notas:**
+
+Este endpoint verifica que el usuario exista antes de crear la bóveda asociada.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/users/vault?email=usuario@dominio.com HTTP/1.1
+Content-Type: application/json
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Bóveda creada exitosamente.",
+  "vaultId": "12345"
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "Usuario no encontrado."
+}
+
+```

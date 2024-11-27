@@ -1,0 +1,78 @@
+---
+title: Vault Assets
+description: Este endpoint permite crear activos (assets) dentro de la bóveda de un usuario.
+---
+
+## POST `/api/users/vault/assets`
+
+### Solicitud
+
+**Método:** POST  
+**Ruta:** `/api/users/vault/assets`
+
+### Cuerpo de la solicitud:**
+
+Este endpoint no requiere parámetros en el cuerpo de la solicitud.
+
+### Respuestas
+
+**201 - Activos creados exitosamente**
+
+```json
+{
+  "message": "Activos creados exitosamente en la bóveda.",
+  "assetId": "67890"
+}
+
+```
+
+**404 - Bóveda no encontrada**
+
+```json
+{
+  "message": "No se encontró una bóveda asociada al usuario."
+}
+
+```
+
+**500 - Error interno del servidor**
+
+```json
+{
+  "message": "Ocurrió un error al intentar crear los activos en la bóveda."
+}
+
+```
+
+**Notas:**
+
+Se utiliza para agregar activos dentro de la bóveda del usuario, pero no requiere parámetros específicos en la solicitud.
+
+### Ejemplo de Uso
+
+**Solicitud HTTP:**
+
+```https
+POST /api/users/vault/assets HTTP/1.1
+Content-Type: application/json
+
+```
+
+**Respuesta Exitosa:**
+
+```json
+{
+  "message": "Activos creados exitosamente en la bóveda.",
+  "assetId": "67890"
+}
+
+```
+
+**Respuesta con Error:**
+
+```json
+{
+  "message": "No se encontró una bóveda asociada al usuario."
+}
+
+```
