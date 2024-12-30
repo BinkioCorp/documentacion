@@ -9,7 +9,7 @@ export default function HomePage() {
         <h1 className="text-5xl md:text-8xl font-extrabold text-center mb-6">
           Make <span className="bg-custom-gradient bg-clip-text text-transparent font-bold">Tokenization</span> real
         </h1>
-        <p className="text-lg md:text-xl text-white text-center mb-10 max-w-2xl">
+        <p className="text-lg md:text-xl text-center mb-10 max-w-2xl">
           We make the impossible possible in real estate and crypto. Integrate with Binkio and take your real estate tokenization to the next level: simplicity, transparency, and the power of tokenization all in one place.
         </p>
         <Link
