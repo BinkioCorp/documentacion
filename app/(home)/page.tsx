@@ -1,6 +1,4 @@
-import Image from 'next/image';
 import { ArrowUpRight, Atom } from 'lucide-react';
-import Link from 'next/link';
 
 export default function HomePage() {
   return (
